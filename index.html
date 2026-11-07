@@ -1,0 +1,930 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chengdu & Jiuzhaigou · Your winter route</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.css"><style>
+:root{--ink:#23392f;--muted:#69756d;--paper:#f7f5ee;--line:#dddeda;--green:#2b674e;--gold:#ba693a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 system-ui,sans-serif}header{padding:23px 30px 15px;border-bottom:1px solid var(--line);background:#fffdf7}h1{font-family:Georgia,serif;font-weight:normal;font-size:31px;line-height:1.1;margin:4px 0 10px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}.top{display:flex;align-items:center;justify-content:space-between;gap:20px}.summary{color:var(--muted);font-size:13px}.badge{background:#e8eee5;border-radius:20px;padding:6px 12px;white-space:nowrap}button,select,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:white;color:var(--ink);border-radius:7px;padding:8px 11px}button:hover{border-color:var(--green)}button.active{background:var(--green);color:white;border-color:var(--green)}nav{display:flex;gap:7px;overflow:auto;padding:12px 30px;background:#fffdf7}nav button{white-space:nowrap;font-size:12px}.tools{display:flex;gap:8px;align-items:center;padding:10px 30px;border-bottom:1px solid var(--line);flex-wrap:wrap}.tools input{width:210px}.tools input,.tools select{background:white;border:1px solid var(--line);padding:8px;border-radius:6px}.tools small{margin-left:auto;color:var(--muted)}main{display:grid;grid-template-columns:390px 1fr;height:calc(100vh - 245px);min-height:500px}aside{overflow:auto;padding:22px 22px 40px;border-right:1px solid var(--line)}h2{font:normal 24px Georgia;margin:0 0 5px}h3{font-size:15px;margin:0 0 3px}.intro{color:var(--muted);font-size:13px;margin-bottom:18px}.stop{position:relative;border-left:2px solid #ccdbcf;padding:0 0 20px 20px;margin-left:13px}.stop:before{content:attr(data-n);position:absolute;left:-14px;top:0;width:25px;height:25px;background:var(--green);color:white;border-radius:50%;text-align:center;font-size:12px;line-height:25px}.time{font-size:11px;letter-spacing:.7px;color:var(--gold);font-weight:750;margin-bottom:6px}.card{background:#fffefb;border:1px solid var(--line);padding:12px;border-radius:10px;cursor:pointer}.card:hover,.card.selected{border-color:var(--green);box-shadow:0 2px 10px #263e3010}.zh{font-size:14px}.pinyin{font-size:12px;color:var(--muted)}.what{font-size:13px;margin:9px 0 0}.leg{font-size:12px;color:var(--muted);margin:8px 0 0;padding:8px;background:#eaf0e8;border-radius:5px}.optional{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.optional button{font-size:12px}.mapwrap{position:relative;min-width:0;background:#e8ece3}#map{height:100%;width:100%;z-index:0}.mapnote{position:absolute;top:12px;left:55px;right:15px;z-index:500;pointer-events:none;font-size:11px;color:#37493e}.mapnote span{display:inline-block;background:#fffefaee;padding:6px 9px;border-radius:6px;box-shadow:0 2px 10px #0001}.detail{position:absolute;bottom:16px;right:16px;z-index:600;background:#fffefbf5;border:1px solid #d7ddd4;border-radius:13px;width:355px;max-height:75%;overflow:auto;box-shadow:0 10px 35px #20332624;padding:19px}.detail.hidden{display:none}.close{float:right;padding:1px 8px;border:0;background:transparent;font-size:22px}.tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--green);background:#edf1e8;border-radius:4px;padding:3px 6px;margin-bottom:8px}.detail h2{font-size:23px;margin:0 25px 7px 0}.detail p{margin:10px 0;font-size:13px}.detail dl{display:grid;grid-template-columns:70px 1fr;gap:8px;font-size:12px;border-top:1px solid var(--line);padding-top:12px}.detail dt{color:var(--muted)}.detail dd{margin:0}.link{color:var(--green);font-weight:650;text-decoration:none}.actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}.actions a{font-size:12px;padding:7px;border:1px solid var(--line);border-radius:5px}.pin{border-radius:50%;background:var(--green);border:2px solid white;color:white;width:29px;height:29px;line-height:25px;text-align:center;box-shadow:0 2px 5px #0004;font-size:12px;font-weight:bold}.pin.optionalpin{background:#b27648}.pin.approx{border-style:dashed}.pin.hotel{background:#4b627c}.pin.transit{background:#666}.allcard{margin:0 0 10px}.footer{padding:9px 30px;color:var(--muted);font-size:11px;background:#fffdf7;border-top:1px solid var(--line)}dialog{border:1px solid var(--line);border-radius:14px;max-width:740px;width:92%;max-height:85vh;padding:25px;color:var(--ink);background:var(--paper)}dialog::backdrop{background:#132d2580}dialog li{margin:14px 0}.warning{padding:12px;background:#f4eadc;border-radius:7px;font-size:12px}.count{font-size:11px;color:var(--muted);margin:12px 0}.listheading{margin:24px 0 7px}.mapfallback{position:absolute;left:30px;top:80px;max-width:400px;padding:20px;background:white;border-radius:10px;z-index:3}.routekey{color:var(--gold)}@media(max-width:850px){header{padding:17px}h1{font-size:25px}.top{display:block}.badge{display:inline-block;margin-top:8px}nav,.tools{padding:10px 17px}main{grid-template-columns:330px 1fr}.detail{width:300px;right:8px;bottom:8px}}@media(max-width:650px){main{display:flex;flex-direction:column-reverse;height:auto;min-height:0}.mapwrap{height:440px}aside{height:550px;border-right:0}.detail{max-height:360px;width:calc(100% - 28px);right:14px}.tools small{margin:0}.summary{font-size:12px}.footer{padding:10px 17px}.mapnote{left:50px}.tools input{width:160px}}
+.map-status{position:absolute;left:12px;bottom:30px;z-index:550;background:#fffefa;padding:8px 12px;max-width:300px;border:1px solid #d7ddd4;border-radius:7px;font-size:12px}.map-status[hidden]{display:none}</style></head><body><header><div class="eyebrow">A winter journey · 2 travellers</div><div class="top"><div><h1>Chengdu & Jiuzhaigou</h1><div class="summary">24 December 2026 – 1 January 2027 · Cafés, old streets, art & alpine lakes</div></div><div class="badge">27 saved places · 3 hotels · 9 days</div></div></header><nav id="days" aria-label="Select day"></nav><div class="tools"><button id="all">All places</button><input id="search" placeholder="Search name / Chinese…" aria-label="Search places"><select id="category" aria-label="Category"><option value="">Every category</option></select><button id="fit">Fit route</button><button id="info">Bookings & travel notes</button><small>China local time · Suggested times, not reservations</small></div><main><aside id="timeline"></aside><section class="mapwrap"><div id="map" aria-label="Interactive trip map"></div><div class="mapnote"><span><b class="routekey">– –</b> Lines show visit order, not roads or rail tracks. Dashed-border pins are approximate.</span></div><div id="map-status" class="map-status" role="status">Loading street map…</div><article class="detail hidden" id="detail"></article></section></main><div class="footer">Prepared from your screenshots and linked references · Shop hours/prices need reconfirmation · Map tiles require internet · Return flight still needed</div><dialog id="notes"><button class="close" onclick="document.getElementById('notes').close()" aria-label="Close">×</button><h2>Before you travel</h2><p class="warning">Train and show times here are planning windows. Nothing new has been booked. Approximate pins indicate neighbourhoods, not confirmed entrances; use the Chinese address for last-mile navigation.</p><ul><li><b>Arrival:</b> Dec 24, 3U3904, SGN Terminal 2 at 09:00 → TFU Terminal 1 at 13:35. Vietnam and China use different local times.</li><li><b>Hotels:</b> Dec 24–27 Huaguoshan; Dec 27–29 Holiday Inn Express Jiuzhaigou; Dec 29–Jan 1 Moon Crescent. Check the Moon Crescent checkout time: the booking summary’s “12:00 AM” is ambiguous.</li><li><b>Rail:</b> 成都东 → 黄龙九寨 on Dec 27; reverse Dec 29. Expected sale-window opening dates are Dec 13 and Dec 15 respectively, subject to station release hours on 12306. Bring the passport used for booking.</li><li><b>Road connection:</b> Huanglongjiuzhai station is not at the park. Reserve the onward shuttle/car and allow 2–2½ hours plus waiting and winter delays. Do not book a tight return train connection.</li><li><b>Winter park day:</b> Check dated opening areas, tickets and bus operation. Wear warm layers and shoes with grip. Follow closure notices and keep the route flexible.</li><li><b>Transport estimates:</b> All city travel ranges are planning allowances, not live routing. Check Amap before leaving; station exits, traffic and winter conditions can change them.</li><li><b>Optional places:</b> Qiaoyiqiao and Donglin require a substantial detour. Use them as replacements for a half-day. Xuhucha, MONDOLI, Daqi and Baijiaban are alternatives, not compulsory extra stops.</li><li><b>Jan 1:</b> Departure time and airport are unknown. The airport route shown applies only if you depart from TFU. CTU is a different airport.</li></ul><h2>Sources & confidence</h2><div id="sources"></div><p class="count">No passenger names, ticket numbers or hotel confirmation numbers are included.</p></dialog><script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script><script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.1/leaflet-maplibre-gl.js"></script><script>
+const DATA={
+  "places": [
+    {
+      "id": "qiao",
+      "en": "Qiaoyiqiao • Dongsheng",
+      "zh": "乔一乔怪味餐厅（东升店）",
+      "py": "Qiáo Yī Qiáo Guàiwèi Cāntīng · Dōngshēng Diàn",
+      "cat": "Food",
+      "lat": 30.5758,
+      "lon": 103.9042,
+      "address": "双流区金河路四段76号艺术公园D座",
+      "hours": "08:30–24:00",
+      "cost": "¥83/person",
+      "duration": "60–90 min",
+      "transport": "Metro 3 to Shuangliu Square 双流广场, then taxi to the Chinese address.",
+      "note": "Far southwest: optional half-day detour. Approximate converted Amap position.",
+      "precise": false
+    },
+    {
+      "id": "luodai",
+      "en": "Luodai Ancient Town",
+      "zh": "洛带古镇",
+      "py": "Luòdài Gǔzhèn",
+      "cat": "Sights",
+      "lat": 30.63939,
+      "lon": 104.32707,
+      "address": "龙泉驿区三峨街999号",
+      "hours": "Outdoor streets; shops vary",
+      "cost": "Town streets free; paid attractions extra",
+      "duration": "3 hours",
+      "transport": "Metro 4 east to Xihe 西河, then taxi about 20–30 min. Bus 219/L024 is an alternative; confirm the current stop and service.",
+      "note": "The ticket shown in your screenshot is for Jinlong Great Wall, not general town entry.",
+      "precise": true
+    },
+    {
+      "id": "wall",
+      "en": "Dongjiao Memory • Chengdu Wall",
+      "zh": "东郊记忆成都墙",
+      "py": "Dōngjiāo Jìyì Chéngdū Qiáng",
+      "cat": "Sights",
+      "lat": 30.669,
+      "lon": 104.1195,
+      "address": "建设南支路4号46栋",
+      "hours": "Outdoor area; businesses vary",
+      "cost": "Free outdoor area",
+      "duration": "2 hours",
+      "transport": "Metro 8 to Dongjiao Memory 东郊记忆; walk into the cultural district.",
+      "note": "Area pin for the district; use Amap for the wall inside the complex.",
+      "precise": false
+    },
+    {
+      "id": "kuanzhai",
+      "en": "Kuanzhai Alleys",
+      "zh": "宽窄巷子景区",
+      "py": "Kuānzhǎi Xiàngzi Jǐngqū",
+      "cat": "Sights",
+      "lat": 30.666,
+      "lon": 104.051,
+      "address": "青羊区宽窄巷子",
+      "hours": "Outdoor streets; shops vary",
+      "cost": "Free streets",
+      "duration": "1½–2 hours",
+      "transport": "Metro 4 to Kuanzhaixiangzi 宽窄巷子 or Metro 2 to Tonghuimen 通惠门.",
+      "note": "Best late afternoon into evening. Shows and museums charge separately.",
+      "precise": false
+    },
+    {
+      "id": "jinli",
+      "en": "Jinli Ancient Street",
+      "zh": "锦里古街",
+      "py": "Jǐnlǐ Gǔjiē",
+      "cat": "Sights",
+      "lat": 30.6446,
+      "lon": 104.0438,
+      "address": "武侯祠大街231号附1号",
+      "hours": "Outdoor streets; shops vary",
+      "cost": "Free street",
+      "duration": "1½ hours",
+      "transport": "Metro 3/5 to Gaoshengqiao 高升桥, then walk roughly 15–20 min or take a short taxi.",
+      "note": "Aim for dusk; allow extra time for crowds.",
+      "precise": false
+    },
+    {
+      "id": "dufu",
+      "en": "Du Fu Thatched Cottage",
+      "zh": "成都杜甫草堂博物馆",
+      "py": "Chéngdū Dù Fǔ Cǎotáng Bówùguǎn",
+      "cat": "Culture",
+      "lat": 30.66277,
+      "lon": 104.02628,
+      "address": "青华路37号",
+      "hours": "Screenshot: 09:00–18:00; reconfirm winter hours",
+      "cost": "About ¥50",
+      "duration": "2½ hours",
+      "transport": "Metro 4 to Caotang North Road 草堂北路, then walk 15–20 min or take a short taxi.",
+      "note": "Plan a morning visit; confirm last entry.",
+      "precise": true
+    },
+    {
+      "id": "donglin",
+      "en": "Donglin Art Village",
+      "zh": "东林艺术村",
+      "py": "Dōnglín Yìshù Cūn",
+      "cat": "Culture",
+      "lat": 30.806,
+      "lon": 103.868,
+      "address": "郫都区德源街道东林村／平义路",
+      "hours": "Screenshot: 08:30–17:00",
+      "cost": "Varies by activity",
+      "duration": "2 hours + long travel",
+      "transport": "Metro 4 to Chengdu West 成都西站; connect to Rong 2 tram 蓉2号线 and check the branch serving Hongqi Avenue 红旗大道; walk about 1.1 km.",
+      "note": "Broad area pin only. Budget 1½–2 hours each way from central Chengdu; replace a half-day, do not add to a full day.",
+      "precise": false
+    },
+    {
+      "id": "shufeng",
+      "en": "Shufeng Yayun • Sichuan Opera",
+      "zh": "蜀风雅韵",
+      "py": "Shǔfēng Yǎyùn",
+      "cat": "Shows",
+      "lat": 30.659,
+      "lon": 104.044,
+      "address": "琴台路文化公园内；以演出票入口为准",
+      "hours": "Evening performance; confirm date/time",
+      "cost": "Screenshot packages from ¥148",
+      "duration": "80–90 min",
+      "transport": "Metro 2 to Tonghuimen 通惠门, then walk to the ticketed entrance in Culture Park.",
+      "note": "20:00 is a planning target, not a confirmed performance. Book ahead; arrive 30 min early.",
+      "precise": false
+    },
+    {
+      "id": "milk",
+      "en": "Xianzhishuang Milk Tea",
+      "zh": "鲜之爽奶茶店",
+      "py": "Xiān Zhī Shuǎng Nǎichá Diàn",
+      "cat": "Cafés",
+      "lat": 30.639,
+      "lon": 104.063,
+      "address": "公行道与中学路交叉口东北约100米",
+      "hours": "10:30–22:00",
+      "cost": "¥10/person",
+      "duration": "20–30 min",
+      "transport": "Metro 1 to Huaxiba 华西坝, followed by a walk or short taxi to the Chinese address.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "taro",
+      "en": "Shengsheng Taro Desserts",
+      "zh": "笙笙芋圆糖水",
+      "py": "Shēngshēng Yùyuán Tángshuǐ",
+      "cat": "Food",
+      "lat": 30.666,
+      "lon": 104.104,
+      "address": "新鸿南路77号双园小区28栋1单元",
+      "hours": "13:00–21:00",
+      "cost": "¥14/person",
+      "duration": "30 min",
+      "transport": "Use Metro 4 Yushuang Road 玉双路 as an access point, then a short taxi/walk checked in Amap.",
+      "note": "Small residential-lane shop; this is an area pin.",
+      "precise": false
+    },
+    {
+      "id": "tea",
+      "en": "Xuhucha • Guangdu",
+      "zh": "叙壶茶（城南广都旗舰店）",
+      "py": "Xù Hú Chá · Chéngnán Guǎngdū Qíjiàn Diàn",
+      "cat": "Cafés",
+      "lat": 30.505,
+      "lon": 104.071,
+      "address": "雅和北一路215号附201号2楼",
+      "hours": "08:00–24:00",
+      "cost": "¥29/person",
+      "duration": "60–90 min",
+      "transport": "Southern metro corridor plus taxi; ask Amap for the best station for this exact branch.",
+      "note": "Broad area pin. Optional tea stop; confirm branch location before choosing a metro exit.",
+      "precise": false
+    },
+    {
+      "id": "mondoli",
+      "en": "MONDOLI • Hejiang",
+      "zh": "MONDOLI（宏都·美丽合江店）",
+      "py": "Hóngdū · Měilì Héjiāng Diàn",
+      "cat": "Cafés",
+      "lat": 30.6455,
+      "lon": 104.08,
+      "address": "天仙桥南路8号附10号",
+      "hours": "10:00–19:00",
+      "cost": "¥48/person",
+      "duration": "45 min",
+      "transport": "Metro 2 to Dongmen Bridge 东门大桥, then walk south to the address.",
+      "note": "Arrival-day option only if time permits; closes at 19:00.",
+      "precise": false
+    },
+    {
+      "id": "yard",
+      "en": "Yard Coffee",
+      "zh": "院子 Yard Coffee",
+      "py": "Yuànzi",
+      "cat": "Cafés",
+      "lat": 30.62,
+      "lon": 104.058,
+      "address": "玉洁巷3号院",
+      "hours": "10:30–19:00",
+      "cost": "¥34/person",
+      "duration": "45–60 min",
+      "transport": "Metro 8 to Fangcao Street 芳草街 or Metro 1/8 to Nijiaqiao 倪家桥; check the final walk in Amap.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "oneplate",
+      "en": "onePlate • Hangkong Road",
+      "zh": "onePlate（航空路店）",
+      "py": "Hángkōng Lù Diàn",
+      "cat": "Cafés",
+      "lat": 30.614,
+      "lon": 104.067,
+      "address": "棕树西街2号附9号",
+      "hours": "08:00–20:00",
+      "cost": "¥32/person",
+      "duration": "45 min",
+      "transport": "Metro 1 to Tongzilin 桐梓林, then walk/taxi to the branch.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "banquet",
+      "en": "Shuyanfu • Immersive Banquet",
+      "zh": "蜀宴赋·成都",
+      "py": "Shǔ Yàn Fù · Chéngdū",
+      "cat": "Shows",
+      "lat": 30.6685,
+      "lon": 104.119,
+      "address": "建设南支路4号东郊记忆27栋1楼",
+      "hours": "Screenshot dinner: 18:30–20:00; confirm",
+      "cost": "¥536/person listing average",
+      "duration": "90–120 min",
+      "transport": "Metro 8 Dongjiao Memory 东郊记忆; walk within the same district as the Chengdu Wall.",
+      "note": "Optional paid dinner show. Reservation, seat tier, date and price must be confirmed. Outdoor dinner nearby is the fallback.",
+      "precise": false
+    },
+    {
+      "id": "haitang",
+      "en": "Xiaodou Haitang • Poly Shiguangli",
+      "zh": "小豆海棠（成都保利时光里）",
+      "py": "Xiǎodòu Hǎitáng · Chéngdū Bǎolì Shíguānglǐ",
+      "cat": "Food",
+      "lat": 30.554,
+      "lon": 104.06,
+      "address": "吉瑞二路99号成都保利时光里1楼1095、1096",
+      "hours": "10:30–21:00",
+      "cost": "¥40/person",
+      "duration": "45–60 min",
+      "transport": "Metro 1 southern corridor, then taxi to 吉瑞二路99号; select the current nearest stop in Amap.",
+      "note": "Broad area pin, not a verified storefront location.",
+      "precise": false
+    },
+    {
+      "id": "jiuzhai",
+      "en": "Jiuzhaigou National Park",
+      "zh": "九寨沟",
+      "py": "Jiǔzhàigōu",
+      "cat": "Nature",
+      "lat": 33.261,
+      "lon": 103.918,
+      "address": "阿坝州九寨沟县漳扎镇九寨沟景区入口",
+      "hours": "Official winter: 08:30–18:00",
+      "cost": "Winter adult: ¥80 entry + ¥80 park bus",
+      "duration": "Full day, 6–7 hours",
+      "transport": "From Holiday Inn Express: approximately 10 min walk to the park entrance. Use the mandatory sightseeing bus network inside.",
+      "note": "Winter access is seasonal. Follow the dispatched bus route and open-area notices; do not assume every upper valley is open.",
+      "precise": false
+    },
+    {
+      "id": "artpark",
+      "en": "Tianfu Art Park",
+      "zh": "天府艺术公园",
+      "py": "Tiānfǔ Yìshù Gōngyuán",
+      "cat": "Nature",
+      "lat": 30.71388,
+      "lon": 104.02023,
+      "address": "金牛坝路388号",
+      "hours": "Outdoor park listed as 24 hours",
+      "cost": "Free outdoor park",
+      "duration": "60–90 min",
+      "transport": "Metro 2 to Yingbin Avenue 迎宾大道, followed by a taxi or a longer walk. Pair with Chengdu Art Museum.",
+      "note": "The park stays accessible independently of museum opening hours.",
+      "precise": true
+    },
+    {
+      "id": "shentang",
+      "en": "Shentang Sweet-Water Noodles",
+      "zh": "沈堂甜水面",
+      "py": "Shěntáng Tiánshuǐmiàn",
+      "cat": "Food",
+      "lat": 30.636,
+      "lon": 104.048,
+      "address": "芳草街新能巷2号附5号",
+      "hours": "09:00–15:00",
+      "cost": "¥16/person",
+      "duration": "45 min",
+      "transport": "Metro 3 to Yiguanmiao 衣冠庙; walk to the Chinese address.",
+      "note": "Lunch only in this plan. Aim before 14:00; do not schedule dinner here.",
+      "precise": false
+    },
+    {
+      "id": "baijia",
+      "en": "Baijiaban Sichuan Opera",
+      "zh": "百家班川剧团（西部文化中心店）",
+      "py": "Bǎijiābān Chuānjùtuán · Xībù Wénhuà Zhōngxīn Diàn",
+      "cat": "Shows",
+      "lat": 30.661,
+      "lon": 104.075,
+      "address": "华兴东街16号3楼304–305",
+      "hours": "Venue listing: 10:00–22:00; show times vary",
+      "cost": "Check dated performance price",
+      "duration": "60–90 min",
+      "transport": "Metro 3/4 to Chengdu Second People’s Hospital 市二医院, then walk to the venue.",
+      "note": "Alternative to Shufeng Yayun, not a second required opera show.",
+      "precise": false
+    },
+    {
+      "id": "yiyuan",
+      "en": "Yiyuan Garden Museum",
+      "zh": "易园园林博物馆",
+      "py": "Yìyuán Yuánlín Bówùguǎn",
+      "cat": "Culture",
+      "lat": 30.715,
+      "lon": 104.003,
+      "address": "金泉路8号",
+      "hours": "10:00–17:00; reconfirm",
+      "cost": "Listing reviews mention free entry; verify",
+      "duration": "60–90 min",
+      "transport": "Metro 2 to Yingbin Avenue 迎宾大道, then taxi/walk to 金泉路8号.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "daqi",
+      "en": "Daqi Teahouse",
+      "zh": "大旗茶馆豪杰春宵",
+      "py": "Dàqí Cháguǎn Háojié Chūnxiāo",
+      "cat": "Cafés",
+      "lat": 30.659,
+      "lon": 104.048,
+      "address": "金河路81号附2号",
+      "hours": "07:00–21:00",
+      "cost": "¥24/person",
+      "duration": "60–90 min",
+      "transport": "Metro 2 to Tonghuimen 通惠门 or People’s Park 人民公园, then walk.",
+      "note": "Your screenshot mentions free shows at 14:30 and 16:30. Treat these as unconfirmed until the venue confirms the date.",
+      "precise": false
+    },
+    {
+      "id": "panda",
+      "en": "Xuankehui Panda Bookstore",
+      "zh": "轩客会·熊猫书店",
+      "py": "Xuānkèhuì · Xióngmāo Shūdiàn",
+      "cat": "Shopping",
+      "lat": 30.648,
+      "lon": 104.076,
+      "address": "镗钯街75号附3号",
+      "hours": "10:00–22:00",
+      "cost": "Shopping/café purchases extra",
+      "duration": "45 min",
+      "transport": "Metro 2 to Dongmen Bridge 东门大桥 or Metro 2/3 to Chunxi Road 春熙路, followed by a walk.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "jaja",
+      "en": "jajainthemoment • Tree House",
+      "zh": "jajainthemoment（成都树屋）",
+      "py": "Chéngdū Shùwū",
+      "cat": "Shopping",
+      "lat": 30.451,
+      "lon": 104.065,
+      "address": "雅州路188号CPI岛W12A",
+      "hours": "10:00–21:00",
+      "cost": "Shopping purchases extra",
+      "duration": "60–90 min; CPI area up to 2 hours",
+      "transport": "Metro 1 to Hongshi Park 红石公园, then a short taxi to CPI岛W12A.",
+      "note": "Broad CPI area pin. A separate southern excursion, not a central-city walk.",
+      "precise": false
+    },
+    {
+      "id": "noodles",
+      "en": "Xiaojiahe Home-Style Noodles",
+      "zh": "肖家河美味家常面（肖家河北街店）",
+      "py": "Xiāojiāhé Měiwèi Jiāchángmiàn · Xiāojiāhé Běijiē Diàn",
+      "cat": "Food",
+      "lat": 30.635,
+      "lon": 104.039,
+      "address": "肖家河北街8号",
+      "hours": "08:00–20:00",
+      "cost": "¥18/person",
+      "duration": "45 min",
+      "transport": "Metro 3 to Yiguanmiao 衣冠庙, then walk about 10–15 min or take a short taxi.",
+      "note": "",
+      "precise": false
+    },
+    {
+      "id": "museum",
+      "en": "Chengdu Art Museum",
+      "zh": "成都市美术馆",
+      "py": "Chéngdū Shì Měishùguǎn",
+      "cat": "Culture",
+      "lat": 30.7155,
+      "lon": 104.022,
+      "address": "华严路181号",
+      "hours": "Plan 10:00–17:00; verify dated hours; usually closed Mondays",
+      "cost": "Check exhibition and reservation requirements",
+      "duration": "1½–2 hours",
+      "transport": "Metro 2 to Yingbin Avenue 迎宾大道, then taxi to the museum; walk to Tianfu Art Park afterward.",
+      "note": "Reserve/check entry through the official 成都市美术馆 channel. Park pin and museum pin are separate.",
+      "precise": false
+    },
+    {
+      "id": "towers",
+      "en": "Financial City Twin Towers",
+      "zh": "成都金融城双子塔",
+      "py": "Chéngdū Jīnróngchéng Shuāngzǐtǎ",
+      "cat": "Sights",
+      "lat": 30.58477,
+      "lon": 104.06226,
+      "address": "锦晖西一街55号",
+      "hours": "Outdoor view after dark; lighting schedule varies",
+      "cost": "Free exterior view",
+      "duration": "45–60 min",
+      "transport": "Metro 1 to Financial City 金融城; walk to the public viewing area.",
+      "note": "No New Year’s Eve countdown or special lighting is assumed.",
+      "precise": true
+    },
+    {
+      "id": "h1",
+      "en": "Chengdu City Huaguoshan Hotel",
+      "zh": "成都城市花果山酒店",
+      "py": "Chéngdū Chéngshì Huāguǒshān Jiǔdiàn",
+      "cat": "Hotels",
+      "lat": 30.654,
+      "lon": 104.065,
+      "address": "人民南路一段122–124号",
+      "hours": "Dec 24–27 • check-in 14:00; checkout by 14:00",
+      "cost": "Booked",
+      "duration": "3 nights",
+      "transport": "Metro 1/2 Tianfu Square 天府广场, then walk/taxi to the address.",
+      "note": "Approximate hotel area. Use the booking’s address for the final entrance.",
+      "precise": false
+    },
+    {
+      "id": "h2",
+      "en": "Holiday Inn Express Jiuzhaigou",
+      "zh": "九寨沟智选假日酒店",
+      "py": "Jiǔzhàigōu Zhìxuǎn Jiàrì Jiǔdiàn",
+      "cat": "Hotels",
+      "lat": 33.266,
+      "lon": 103.916,
+      "address": "漳扎镇彭丰村4号",
+      "hours": "Dec 27–29 • check-in 14:00; checkout 12:00",
+      "cost": "Booked",
+      "duration": "2 nights",
+      "transport": "About 10 min walk from the park entrance, according to IHG.",
+      "note": "Approximate Pengfeng area pin. Breakfast listed 07:00–09:30; confirm with the hotel.",
+      "precise": false
+    },
+    {
+      "id": "h3",
+      "en": "Moon Crescent Hotel",
+      "zh": "月牙至臻酒店",
+      "py": "Yuèyá Zhìzhēn Jiǔdiàn",
+      "cat": "Hotels",
+      "lat": 30.68,
+      "lon": 104.052,
+      "address": "金牛区马家花园路3号",
+      "hours": "Dec 29–Jan 1 • check-in listed 10:30; confirm checkout",
+      "cost": "Booked",
+      "duration": "3 nights",
+      "transport": "Taxi from Chengdu East is simplest with luggage. For metro, ask Amap for the best station/exit to 马家花园路3号.",
+      "note": "Booking summary says “12:00 AM” checkout; verify directly rather than interpreting this as midnight. Approximate hotel area pin.",
+      "precise": false
+    },
+    {
+      "id": "tfu",
+      "en": "Chengdu Tianfu Airport • T1",
+      "zh": "成都天府国际机场 T1",
+      "py": "Chéngdū Tiānfǔ Guójì Jīchǎng",
+      "cat": "Transit",
+      "lat": 30.312,
+      "lon": 104.441,
+      "address": "成都天府国际机场1号航站楼",
+      "hours": "Dec 24 arrival 13:35 China time • 3U3904",
+      "cost": "Flight booked",
+      "duration": "Allow 1–2 hours for arrival formalities",
+      "transport": "Metro 18 to South Railway Station 火车南站; transfer to Metro 1 north to Tianfu Square 天府广场. Allow roughly 90–120 min from terminal to hotel after immigration.",
+      "note": "Departure SGN T2 at 09:00 Vietnam time. Return airport/time has not been supplied.",
+      "precise": false
+    },
+    {
+      "id": "east",
+      "en": "Chengdu East Railway Station",
+      "zh": "成都东站",
+      "py": "Chéngdū Dōng Zhàn",
+      "cat": "Transit",
+      "lat": 30.629,
+      "lon": 104.14,
+      "address": "成都东站",
+      "hours": "Travel Dec 27 and Dec 29; trains not yet selected",
+      "cost": "Check 12306 when tickets release",
+      "duration": "Arrive 60 min before departure",
+      "transport": "Metro 2 links Tianfu Square 天府广场 directly to Chengdu East 成都东客站; follow railway departure signage.",
+      "note": "Buy Chengdu East → Huanglongjiuzhai, not Jiuzhai Huanglong Airport. Passport details must match tickets.",
+      "precise": false
+    },
+    {
+      "id": "huanglong",
+      "en": "Huanglongjiuzhai Railway Station",
+      "zh": "黄龙九寨站",
+      "py": "Huánglóng Jiǔzhài Zhàn",
+      "cat": "Transit",
+      "lat": 32.747683,
+      "lon": 103.613244,
+      "address": "松潘县黄龙九寨站",
+      "hours": "Transfer point, not the national park",
+      "cost": "Train/shuttle fares depend on booked service",
+      "duration": "About 2–2½ hours by road to Jiuzhaigou",
+      "transport": "Book the connecting shuttle toward Jiuzhaigou scenic area, or prearrange a car; confirm the stop closest to 彭丰村.",
+      "note": "The station is roughly 93 km from Jiuzhaigou. Allow waiting time and winter-road buffer.",
+      "precise": true
+    }
+  ],
+  "days": [
+    {
+      "id": "24",
+      "label": "24 Dec · Arrival",
+      "subtitle": "Tianfu arrival → central Chengdu",
+      "stops": [
+        {
+          "time": "13:35",
+          "id": "tfu",
+          "what": "Arrive on 3U3904. Immigration, baggage and a light meal.",
+          "leg": "SGN 09:00 → TFU 13:35; local times differ by one hour."
+        },
+        {
+          "time": "~17:00",
+          "id": "h1",
+          "what": "Check in and rest. Arrival timing is deliberately flexible.",
+          "leg": "Metro 18 → 火车南站 → Metro 1 to 天府广场; roughly 90–120 min after airport formalities."
+        },
+        {
+          "time": "18:00",
+          "id": "panda",
+          "what": "An easy bookstore visit and dinner nearby, only if you feel rested.",
+          "leg": "Taxi about 15–25 min or check the walk from your hotel in Amap."
+        }
+      ],
+      "optional": [
+        "mondoli",
+        "baijia"
+      ]
+    },
+    {
+      "id": "25",
+      "label": "25 Dec · South",
+      "subtitle": "Yulin cafés → CPI → evening towers",
+      "stops": [
+        {
+          "time": "09:00",
+          "id": "oneplate",
+          "what": "Breakfast; keep this short if you prefer more time at CPI.",
+          "leg": "Metro 1 south to 桐梓林, then local walk."
+        },
+        {
+          "time": "10:30",
+          "id": "yard",
+          "what": "Courtyard coffee. Skip if one café is enough.",
+          "leg": "Short taxi about 10–20 min; verify the lane entrance."
+        },
+        {
+          "time": "12:00",
+          "id": "shentang",
+          "what": "Sweet-water noodles before the 15:00 closing time.",
+          "leg": "Taxi about 15–25 min; lunch queue buffer included."
+        },
+        {
+          "time": "14:30",
+          "id": "jaja",
+          "what": "Explore the tree-house shop and CPI area.",
+          "leg": "Reach Metro 1, travel south to 红石公园, then taxi; allow 75–100 min including transfers."
+        },
+        {
+          "time": "17:30",
+          "id": "haitang",
+          "what": "Early dinner at the exact Poly Shiguangli branch.",
+          "leg": "Taxi or Metro 1 north plus taxi; allow 45–70 min from CPI."
+        },
+        {
+          "time": "19:00",
+          "id": "towers",
+          "what": "Exterior views after dark, then return to the hotel.",
+          "leg": "Short taxi roughly 20–35 min; return by Metro 1 north."
+        }
+      ],
+      "optional": [
+        "tea",
+        "qiao"
+      ]
+    },
+    {
+      "id": "26",
+      "label": "26 Dec · East",
+      "subtitle": "Luodai day trip → Dongjiao Memory",
+      "stops": [
+        {
+          "time": "09:30",
+          "id": "luodai",
+          "what": "Explore the town and have lunch. Leave around 12:30.",
+          "leg": "Leave hotel around 07:45–08:00: Metro 1 to 骡马市, Metro 4 to 西河, then taxi. Allow 90–120 min."
+        },
+        {
+          "time": "14:30",
+          "id": "taro",
+          "what": "Dessert break if the return trip runs on time.",
+          "leg": "Taxi to 西河 → Metro 4 toward 玉双路 → short taxi; allow 90–120 min from Luodai."
+        },
+        {
+          "time": "15:45",
+          "id": "wall",
+          "what": "Explore the cultural district and find the Chengdu Wall.",
+          "leg": "Taxi roughly 20–35 min; metro alternative via Line 8."
+        },
+        {
+          "time": "18:30",
+          "id": "banquet",
+          "what": "Optional immersive dinner show, only with confirmed booking. Otherwise eat in the district.",
+          "leg": "Walk within Dongjiao Memory; allow time to find the correct building."
+        }
+      ],
+      "optional": []
+    },
+    {
+      "id": "27",
+      "label": "27 Dec · To Jiuzhai",
+      "subtitle": "High-speed rail + mountain-road transfer",
+      "stops": [
+        {
+          "time": "~07:30",
+          "id": "h1",
+          "what": "Check out; take luggage and breakfast.",
+          "leg": "Times below are a planning window, not a train timetable."
+        },
+        {
+          "time": "~08:15",
+          "id": "east",
+          "what": "Arrive around 60 min before your chosen train. Target departure around 09:00–10:00.",
+          "leg": "Metro 2 from 天府广场 eastbound to 成都东客站; allow 40–60 min door to platform security."
+        },
+        {
+          "time": "Late morning",
+          "id": "huanglong",
+          "what": "Meet the connecting shuttle or reserved driver.",
+          "leg": "High-speed rail from 成都东 to 黄龙九寨, typically about 1¾–2¼ hours; select the actual service on 12306."
+        },
+        {
+          "time": "14:00–16:00",
+          "id": "h2",
+          "what": "Check in, rest and arrange tomorrow’s park entry.",
+          "leg": "Shuttle/car around 2–2½ hours plus waiting. Keep a winter-road buffer."
+        }
+      ],
+      "optional": []
+    },
+    {
+      "id": "28",
+      "label": "28 Dec · National park",
+      "subtitle": "One full winter day in Jiuzhaigou",
+      "stops": [
+        {
+          "time": "07:00",
+          "id": "h2",
+          "what": "Breakfast; carry water, lunch/snacks and warm layers.",
+          "leg": ""
+        },
+        {
+          "time": "08:30",
+          "id": "jiuzhai",
+          "what": "Enter at winter opening. Take the dispatched sightseeing bus to the open upper valley.",
+          "leg": "Walk approximately 10 min to the entrance; leave time for ticket/passport checks."
+        },
+        {
+          "time": "12:00",
+          "id": "jiuzhai",
+          "what": "Lunch around the Nuorilang hub; use the park buses between open valleys.",
+          "leg": "Upper Rize or Zechawa access depends on the day’s winter closures."
+        },
+        {
+          "time": "14:00–16:00",
+          "id": "jiuzhai",
+          "what": "Continue through open lower-valley lakes and viewpoints. Head back before dusk.",
+          "leg": "Use the sightseeing bus; this route does not require walking the entire park."
+        },
+        {
+          "time": "16:30–17:00",
+          "id": "h2",
+          "what": "Return, dinner nearby and pack for tomorrow.",
+          "leg": "Allow time for the exit bus and the walk back."
+        }
+      ],
+      "optional": []
+    },
+    {
+      "id": "29",
+      "label": "29 Dec · Back to Chengdu",
+      "subtitle": "Transfer day → Kuanzhai evening",
+      "stops": [
+        {
+          "time": "~08:00",
+          "id": "h2",
+          "what": "Check out and take the prebooked station transfer.",
+          "leg": "Choose a train that fits the confirmed shuttle departure."
+        },
+        {
+          "time": "~11:00",
+          "id": "huanglong",
+          "what": "Arrive at least 60 min before a noon/early-afternoon train.",
+          "leg": "Allow 2–2½ hours by road plus winter contingency; an earlier shuttle may be necessary."
+        },
+        {
+          "time": "Afternoon",
+          "id": "east",
+          "what": "Return to Chengdu.",
+          "leg": "Rail about 1¾–2¼ hours; exact departure and arrival depend on booking."
+        },
+        {
+          "time": "15:30–17:00",
+          "id": "h3",
+          "what": "Check in at Moon Crescent and rest.",
+          "leg": "Taxi about 35–60 min with traffic from Chengdu East."
+        },
+        {
+          "time": "Evening",
+          "id": "kuanzhai",
+          "what": "Flexible dinner and a stroll; skip if the transfer is delayed.",
+          "leg": "Taxi about 15–25 min from the hotel area."
+        }
+      ],
+      "optional": [
+        "daqi",
+        "baijia"
+      ]
+    },
+    {
+      "id": "30",
+      "label": "30 Dec · West & old town",
+      "subtitle": "Du Fu → local noodles → Jinli → opera",
+      "stops": [
+        {
+          "time": "09:00",
+          "id": "dufu",
+          "what": "Visit the gardens and museum.",
+          "leg": "Metro 4 to 草堂北路 + walk/taxi, or taxi from hotel; allow 35–55 min."
+        },
+        {
+          "time": "12:15",
+          "id": "noodles",
+          "what": "Lunch at Xiaojiahe.",
+          "leg": "Taxi roughly 25–40 min."
+        },
+        {
+          "time": "14:00",
+          "id": "milk",
+          "what": "Short milk-tea stop, then some free time.",
+          "leg": "Taxi roughly 15–25 min; use this as an optional rest break."
+        },
+        {
+          "time": "16:00",
+          "id": "jinli",
+          "what": "Explore as the lanterns come on; early dinner nearby.",
+          "leg": "Taxi roughly 20–35 min. Leave around 18:30–19:00."
+        },
+        {
+          "time": "19:30",
+          "id": "shufeng",
+          "what": "Arrive for a target 20:00 show, only after confirming the performance.",
+          "leg": "Taxi roughly 25–45 min; allow the full 30 min pre-show buffer."
+        }
+      ],
+      "optional": [
+        "daqi",
+        "baijia"
+      ]
+    },
+    {
+      "id": "31",
+      "label": "31 Dec · Art & gardens",
+      "subtitle": "Northwest cluster → relaxed New Year’s Eve",
+      "stops": [
+        {
+          "time": "10:00",
+          "id": "yiyuan",
+          "what": "Garden visit.",
+          "leg": "Metro 2 to 迎宾大道 + short taxi, or direct taxi; allow 40–60 min."
+        },
+        {
+          "time": "12:00",
+          "id": "artpark",
+          "what": "Lunch near the park; leave time to reach the museum.",
+          "leg": "Short taxi about 15–25 min between the two areas."
+        },
+        {
+          "time": "13:00",
+          "id": "museum",
+          "what": "Visit the exhibitions with any required reservation.",
+          "leg": "Walk within the art-park area; verify the correct hall entrance."
+        },
+        {
+          "time": "15:00",
+          "id": "artpark",
+          "what": "Lakeside walk, then return to rest.",
+          "leg": "Walk; leave before it gets too cold."
+        },
+        {
+          "time": "Evening",
+          "id": "h3",
+          "what": "Keep dinner near the hotel flexible. No ticketed countdown is assumed.",
+          "leg": "Taxi or Metro 2 back toward the centre; expect holiday traffic."
+        }
+      ],
+      "optional": [
+        "donglin"
+      ]
+    },
+    {
+      "id": "01",
+      "label": "1 Jan · Departure TBD",
+      "subtitle": "No return flight or airport supplied",
+      "stops": [
+        {
+          "time": "To confirm",
+          "id": "h3",
+          "what": "Confirm checkout time and your departure airport/time before adding activities.",
+          "leg": ""
+        },
+        {
+          "time": "If TFU",
+          "id": "tfu",
+          "what": "For an international flight, plan to leave central Chengdu about 5 hours before departure, then refine once the flight is known.",
+          "leg": "Metro 1 south to 火车南站 → Metro 18 to TFU. This is conditional: do not use it for Shuangliu (CTU)."
+        }
+      ],
+      "optional": []
+    }
+  ],
+  "sources": [
+    [
+      "Your Amap screenshots",
+      "Names, Chinese addresses, listed shop hours and average spending; supplied Nov 6, 2026. These are not confirmed holiday opening times.",
+      ""
+    ],
+    [
+      "Your booking screenshots",
+      "Flight and hotel dates. Booking references and ticket numbers are intentionally omitted from this shareable map.",
+      ""
+    ],
+    [
+      "Jiuzhaigou official visitor information",
+      "Winter hours and ¥80 entry + ¥80 sightseeing bus; reconfirm for Dec 28.",
+      "https://en.jiuzhai.com/about/visitor-information"
+    ],
+    [
+      "12306 ticket sale rules",
+      "15-day sale window: expected Dec 13 opening for Dec 27 and Dec 15 for Dec 29; check the station-specific release hour.",
+      "https://kyfw.12306.cn/otn/gonggao/saleTicketMeans.html?linktypeid=means2"
+    ],
+    [
+      "IHG hotel information",
+      "Holiday Inn Express address, park walk and check-in/out.",
+      "https://www.ihg.com/holidayinnexpress/hotels/gb/en/jiuzhaigou/jihha/hoteldetail"
+    ],
+    [
+      "Chengdu Metro station directory",
+      "Line/station reference. Always check the live route and operating hours.",
+      "https://www.metroman.cn/en/cities/chengdu/stations"
+    ],
+    [
+      "Huanglongjiuzhai transfer guide",
+      "Station-to-park distance and roughly two-hour road transfer.",
+      "https://m.cd.bendibao.com/traffic/189004.shtm?src=amap"
+    ],
+    [
+      "Mapcarta / OpenStreetMap",
+      "Source positions for Du Fu, Luodai town centre, Tianfu Art Park and Twin Towers. Other pins are approximate area locators.",
+      "https://mapcarta.com/W837167065"
+    ],
+    [
+      "Chengdu Art Museum listing",
+      "Opening-hours reference; verify reservations through the official museum channel.",
+      "https://you.ctrip.com/sight/chengdu104/145174004.html"
+    ]
+  ]
+};
+const byId=Object.fromEntries(DATA.places.map(p=>[p.id,p]));let day='24',showAll=false,map=null,markers={},layer=null,selected=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const amap=p=>'https://uri.amap.com/search?keyword='+encodeURIComponent(p.zh+' '+p.address)+'&city='+encodeURIComponent(['jiuzhai','h2'].includes(p.id)?'九寨沟':'成都')+'&view=map&src=travelplan';
+if(window.L){map=L.map('map',{scrollWheelZoom:true}).setView([30.66,104.06],12);const status=document.getElementById('map-status');
+map.attributionControl.addAttribution('<a href="https://openfreemap.org/">OpenFreeMap</a> · <a href="https://openmaptiles.org/">OpenMapTiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors');
+try {
+ if(!window.maplibregl || !L.maplibreGL) throw new Error('Map library unavailable');
+ const basemap=L.maplibreGL({style:'https://tiles.openfreemap.org/styles/liberty',attributionControl:false}).addTo(map);
+ const gl=basemap.getMaplibreMap();
+ gl.on('idle',()=>{if(gl.isStyleLoaded() && gl.areTilesLoaded())status.hidden=true;});
+ gl.on('error',()=>{status.hidden=false;status.textContent='Background map could not fully load. Check your internet connection and reload. Place cards remain available.';});
+} catch(error) {status.hidden=false;status.textContent='Street map unavailable. This map needs internet access and a browser with WebGL enabled. Place cards remain available.';}
+layer=L.layerGroup().addTo(map)}else{document.getElementById('map-status').hidden=true;document.getElementById('map').innerHTML='<div class="mapfallback"><h3>Map library needs an internet connection</h3><p>The complete timeline and place cards still work. Reopen this file online to load the map.</p></div>'}
+DATA.days.forEach(d=>{let b=document.createElement('button');b.textContent=d.label;b.dataset.day=d.id;b.onclick=()=>{day=d.id;showAll=false;document.getElementById('search').value='';document.getElementById('category').value='';render()};document.getElementById('days').append(b)});
+[...new Set(DATA.places.map(p=>p.cat))].sort().forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;document.getElementById('category').append(o)});
+function chosen(){let q=document.getElementById('search').value.toLowerCase().trim(),c=document.getElementById('category').value,d=DATA.days.find(d=>d.id===day);return DATA.places.filter(p=>(showAll||d.stops.some(s=>s.id===p.id)||d.optional.includes(p.id))&&(!c||p.cat===c)&&(!q||[p.en,p.zh,p.py,p.address].join(' ').toLowerCase().includes(q)))}
+function card(p,extra=''){return `<div class="card ${selected===p.id?'selected':''}" tabindex="0" role="button" data-place="${p.id}"><h3>${esc(p.en)}</h3><div class="zh">${esc(p.zh)}</div><div class="pinyin">${esc(p.py)}</div>${extra}</div>`}
+function render(){let d=DATA.days.find(d=>d.id===day),visible=chosen(),ids=new Set(visible.map(p=>p.id)),tl=document.getElementById('timeline');document.querySelectorAll('[data-day]').forEach(b=>b.classList.toggle('active',!showAll&&b.dataset.day===day));document.getElementById('all').classList.toggle('active',showAll);
+ if(showAll){tl.innerHTML=`<h2>Your saved places</h2><div class="intro">Every place is retained. Select a card for transport, pinyin, address and navigation.</div><div class="count">${visible.length} of 33 places and travel anchors shown</div>`+visible.map(p=>`<div class="allcard">${card(p,`<div class="count">${esc(p.cat)} · ${esc(p.duration)} · ${p.precise?'Sourced point / centre':'Approximate area'}</div>`)}</div>`).join('')}else{tl.innerHTML=`<h2>${esc(d.label)}</h2><div class="intro">${esc(d.subtitle)}</div>`+d.stops.map((s,i)=>ids.has(s.id)?`<div class="stop" data-n="${i+1}"><div class="time">${esc(s.time)}</div>${card(byId[s.id],`<p class="what">${esc(s.what)}</p>`)}${s.leg?`<div class="leg">↳ ${esc(s.leg)}</div>`:''}</div>`:'').join('')+(d.optional.length?'<h3 class="listheading">Optional / swap in</h3><div class="intro">Choose an alternative; do not squeeze every stop into the day.</div><div class="optional">'+d.optional.filter(id=>ids.has(id)).map(id=>`<button data-place="${id}">${esc(byId[id].en)}</button>`).join('')+'</div>':'');}
+ tl.querySelectorAll('[data-place]').forEach(e=>{e.onclick=()=>select(e.dataset.place);e.onkeydown=v=>{if(v.key==='Enter'||v.key===' '){v.preventDefault();select(e.dataset.place)}}});
+ if(map){layer.clearLayers();markers={};visible.forEach(p=>{let idx=d.stops.findIndex(s=>s.id===p.id),n=!showAll&&idx>=0?String(idx+1):p.cat==='Hotels'?'H':p.cat==='Transit'?'↗':'•';let cl=!p.precise?' approx':'';cl+=p.cat==='Hotels'?' hotel':p.cat==='Transit'?' transit':!showAll&&d.optional.includes(p.id)?' optionalpin':'';let m=L.marker([p.lat,p.lon],{icon:L.divIcon({className:'',html:`<div class="pin${cl}">${n}</div>`,iconSize:[29,29],iconAnchor:[14,14]})}).addTo(layer).bindTooltip(esc(p.en)+(p.precise?'':' · approximate area'));m.on('click',()=>select(p.id));markers[p.id]=m;});if(!showAll){let route=d.stops.filter(s=>ids.has(s.id)).map(s=>[byId[s.id].lat,byId[s.id].lon]);if(route.length>1)L.polyline(route,{color:'#bd7547',weight:3,dashArray:'6 9',opacity:.8,interactive:false}).addTo(layer)}fit();}
+}
+function fit(){if(!map)return;let ps=chosen();if(ps.length)map.fitBounds(L.latLngBounds(ps.map(p=>[p.lat,p.lon])),{padding:[45,45],maxZoom:14});}
+function select(id){selected=id;let p=byId[id],el=document.getElementById('detail');el.classList.remove('hidden');el.innerHTML=`<button class="close" aria-label="Close details" onclick="document.getElementById('detail').classList.add('hidden')">×</button><div class="tag">${esc(p.cat)} · ${p.precise?'Sourced point / centre':'Approximate area pin'}</div><h2>${esc(p.en)}</h2><div class="zh">${esc(p.zh)}</div><div class="pinyin">${esc(p.py)}</div><dl><dt>Address</dt><dd>${esc(p.address)}</dd><dt>Hours</dt><dd>${esc(p.hours)}</dd><dt>Allow</dt><dd>${esc(p.duration)}</dd><dt>Budget</dt><dd>${esc(p.cost)}</dd></dl><p><b>How to get there</b><br>${esc(p.transport)}</p>${p.note?`<p class="warning">${esc(p.note)}</p>`:''}<div class="actions"><a class="link" target="_blank" rel="noopener" href="${amap(p)}">Find exact place in Amap ↗</a><button id="copyaddress">Copy Chinese address</button></div><p class="count">Shop hours and average spending are screenshot references, not dated bookings. Amap opens a search to help you verify the matching branch.</p>`;el.querySelector('#copyaddress').onclick=async function(){let t=p.zh+'\n'+p.address;try{await navigator.clipboard.writeText(t);this.textContent='Copied'}catch{prompt('Copy this address:',t)}};if(map){map.flyTo([p.lat,p.lon],Math.max(map.getZoom(),p.id==='donglin'||p.id==='jaja'?12:14),{duration:.6})}document.querySelectorAll('.card').forEach(e=>e.classList.toggle('selected',e.dataset.place===id));}
+document.getElementById('all').onclick=()=>{showAll=true;render()};document.getElementById('fit').onclick=fit;document.getElementById('search').oninput=()=>{showAll=true;render()};document.getElementById('category').onchange=()=>{showAll=true;render()};document.getElementById('info').onclick=()=>document.getElementById('notes').showModal();document.getElementById('sources').innerHTML=DATA.sources.map(s=>`<p><b>${s[2]?`<a class="link" target="_blank" rel="noopener" href="${esc(s[2])}">${esc(s[0])} ↗</a>`:esc(s[0])}</b><br>${esc(s[1])}</p>`).join('');render();
+</script></body></html>
